@@ -1,2 +1,2 @@
 # Legal-ease
-Legal ease AI powed legal document generator 
+Legal ease AI powered legal document generator
