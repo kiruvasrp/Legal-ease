@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LegalEase AI - Precision Legal Document Architect</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top App Navigation Bar -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+          <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+          <path d="M7 21h10"/>
+          <path d="M12 3v18"/>
+          <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">
+          LegalEase AI
+          <span class="badge">v2.0 Pro</span>
+        </div>
+        <div class="brand-subtitle">Precision Legal Document Architect &amp; Contract Synthesizer</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn btn-outline btn-sm" id="btn-copy" title="Copy Markdown to Clipboard">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+        </svg>
+        <span>Copy Markdown</span>
+      </button>
+
+      <button class="btn btn-secondary btn-sm" id="btn-export-txt" title="Download Plain Text with Strict Continuity">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" x2="12" y1="15" y2="3"/>
+        </svg>
+        <span>TXT</span>
+      </button>
+
+      <button class="btn btn-secondary btn-sm" id="btn-export-doc" title="Download Word-Compatible .DOC Document">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+          <path d="M10 9H8"/>
+          <path d="M16 13H8"/>
+          <path d="M16 17H8"/>
+        </svg>
+        <span>DOCX / Word</span>
+      </button>
+
+      <button class="btn btn-gold btn-sm" id="btn-print" title="Print or Save as Clean PDF">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"/>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <rect width="12" height="8" x="6" y="14"/>
+        </svg>
+        <span>Print / PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Application Workspace -->
+  <main class="app-main">
+
+    <!-- Left Panel: Input Architect Studio -->
+    <aside class="panel-inputs">
+      <div class="panel-header">
+        <div class="panel-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+          </svg>
+          Document Architect Parameters
+        </div>
+        <button class="btn btn-outline btn-sm" id="btn-reset-form" title="Reset all fields">Reset</button>
+      </div>
+
+      <div class="panel-scrollable">
+        
+        <!-- Presets Selection Bar -->
+        <div class="presets-container">
+          <div class="section-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            Preset Templates
+          </div>
+          <div class="presets-chips">
+            <button type="button" class="preset-chip active" data-preset="freelance">
+              <span>Freelance Contract</span>
+              <span class="sub">Contractor / Client Scope</span>
+            </button>
+            <button type="button" class="preset-chip" data-preset="nda">
+              <span>Mutual NDA</span>
+              <span class="sub">Confidentiality & Trade Secrets</span>
+            </button>
+            <button type="button" class="preset-chip" data-preset="employment">
+              <span>Employment Agreement</span>
+              <span class="sub">Executive & Staff Salary</span>
+            </button>
+            <button type="button" class="preset-chip" data-preset="lease">
+              <span>Commercial Lease</span>
+              <span class="sub">Office Space & Tenancy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. Document Type -->
+        <div class="form-group">
+          <label class="form-label" for="input-doc-type">
+            <span>1. Document Type [document_type]</span>
+            <span class="form-hint">Standardized Legal Title</span>
+          </label>
+          <input type="text" id="input-doc-type" class="form-input" placeholder="e.g. Freelance Work Contract" value="Freelance Work Contract">
+        </div>
+
+        <!-- 2. Parties Involved -->
+        <div class="form-group">
+          <label class="form-label">
+            <span>2. Parties Involved [parties]</span>
+            <span class="form-hint">Entity designations &amp; roles</span>
+          </label>
+
+          <!-- Party 1 Card -->
+          <div class="party-card">
+            <div class="party-card-title">
+              <span>PARTY 1 (FIRST COVENANTOR)</span>
+            </div>
+            <div class="grid-2">
+              <input type="text" id="input-party1-name" class="form-input" placeholder="Legal Name (e.g. Apex Digital LLC)" value="Apex Digital Solutions LLC">
+              <input type="text" id="input-party1-role" class="form-input" placeholder="Role (e.g. Client, Employer)" value="Client">
+            </div>
+            <input type="text" id="input-party1-details" class="form-input" placeholder="Entity Structure / Address" value="a Delaware limited liability company having its principal place of business at 100 Innovation Way, Suite 400, Wilmington, DE 19801">
+          </div>
+
+          <!-- Party 2 Card -->
+          <div class="party-card" style="margin-top: 0.5rem;">
+            <div class="party-card-title">
+              <span>PARTY 2 (SECOND COVENANTOR)</span>
+            </div>
+            <div class="grid-2">
+              <input type="text" id="input-party2-name" class="form-input" placeholder="Legal Name (e.g. Jordan Vance)" value="Jordan Vance">
+              <input type="text" id="input-party2-role" class="form-input" placeholder="Role (e.g. Contractor, Employee)" value="Contractor">
+            </div>
+            <input type="text" id="input-party2-details" class="form-input" placeholder="Residency / Corporate Address" value="an independent consultant residing at 742 Evergreen Terrace, Austin, TX 78701">
+          </div>
+        </div>
+
+        <!-- 3. Effective Date -->
+        <div class="form-group">
+          <label class="form-label" for="input-date">
+            <span>3. Effective Date [dates]</span>
+            <span class="form-hint">Execution or commencement</span>
+          </label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="date" id="input-date" class="form-input" style="flex: 1;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-today-date">Today</button>
+          </div>
+        </div>
+
+        <!-- 4. Terms & Conditions -->
+        <div class="form-group">
+          <label class="form-label" for="input-terms">
+            <span>4. Terms &amp; Conditions [terms]</span>
+            <span class="form-hint">Shorthand or semicolon-delimited clauses</span>
+          </label>
+          
+          <div class="quick-tags">
+            <span class="quick-tag" data-tag="Services: Full-stack software engineering and architecture deliverables">+ Scope / Services</span>
+            <span class="quick-tag" data-tag="Compensation: $10,000 payable net 30 upon invoice approval">+ Payment</span>
+            <span class="quick-tag" data-tag="Term: 12 months with 30 days written termination notice">+ Term</span>
+            <span class="quick-tag" data-tag="Intellectual Property: All deliverables are work made for hire">+ IP Assignment</span>
+            <span class="quick-tag" data-tag="Confidentiality: 3-year non-disclosure covenant surviving termination">+ NDA</span>
+            <span class="quick-tag" data-tag="Governing Law: Laws of the State of Delaware">+ Governing Law</span>
+          </div>
+
+          <textarea id="input-terms" class="form-textarea" rows="8" placeholder="Enter terms separated by semicolons or newlines..."></textarea>
+        </div>
+
+      </div>
+
+      <!-- Panel Footer Actions -->
+      <div class="panel-footer">
+        <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.775rem; color: var(--text-muted); cursor: pointer;">
+          <input type="checkbox" id="check-auto-update" checked>
+          <span>Live Auto-Synthesize</span>
+        </label>
+
+        <button class="btn btn-primary" id="btn-generate">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+          </svg>
+          <span>Synthesize Agreement</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Right Panel: Document Studio & Live Bond Viewer -->
+    <section class="panel-preview">
+      
+      <!-- Toolbar -->
+      <div class="preview-toolbar">
+        <div class="toolbar-left">
+          <div class="tab-group">
+            <button class="tab-btn active" id="tab-doc-view">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              <span>Legal Bond Paper</span>
+            </button>
+            <button class="tab-btn" id="tab-md-view">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 7 4 4 20 4 20 7"/>
+                <line x1="9" x2="15" y1="20" y2="20"/>
+                <line x1="12" x2="12" y1="4" y2="20"/>
+              </svg>
+              <span>Raw Markdown</span>
+            </button>
+          </div>
+
+          <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: var(--text-dim); margin-left: 0.5rem; cursor: pointer;">
+            <input type="checkbox" id="check-content-editable">
+            <span>Direct In-Document Editing</span>
+          </label>
+        </div>
+
+        <div class="toolbar-right">
+          <div class="doc-stats">
+            <span class="stat-item" id="stat-words">0 words</span>
+            <span>•</span>
+            <span class="stat-item" id="stat-clauses">0 clauses</span>
+            <span>•</span>
+            <span class="stat-item" id="stat-time">&lt; 1 min read</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document Display Stage -->
+      <div class="preview-stage" id="preview-stage">
+        
+        <!-- Rendered Legal Bond Paper View -->
+        <div id="document-render-container" style="width: 100%; display: flex; justify-content: center;">
+          <!-- Dynamically inserted by generator.js -->
+        </div>
+
+        <!-- Markdown View (Hidden by default) -->
+        <div id="markdown-render-container" class="markdown-container" style="display: none;">
+          <textarea id="markdown-output" class="markdown-textarea" readonly></textarea>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Visual Toast Notification -->
+  <div class="toast" id="toast-notification">
+    <div class="toast-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+    </div>
+    <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="templates.js"></script>
+  <script src="generator.js"></script>
+  <script>
+    // App Controller & State Management
+    (function() {
+      // DOM Elements
+      const inputDocType = document.getElementById("input-doc-type");
+      const inputParty1Name = document.getElementById("input-party1-name");
+      const inputParty1Role = document.getElementById("input-party1-role");
+      const inputParty1Details = document.getElementById("input-party1-details");
+      const inputParty2Name = document.getElementById("input-party2-name");
+      const inputParty2Role = document.getElementById("input-party2-role");
+      const inputParty2Details = document.getElementById("input-party2-details");
+      const inputDate = document.getElementById("input-date");
+      const inputTerms = document.getElementById("input-terms");
+      const btnTodayDate = document.getElementById("btn-today-date");
+      const checkAutoUpdate = document.getElementById("check-auto-update");
+      const btnGenerate = document.getElementById("btn-generate");
+      const btnResetForm = document.getElementById("btn-reset-form");
+
+      const presetButtons = document.querySelectorAll(".preset-chip");
+      const quickTags = document.querySelectorAll(".quick-tag");
+
+      const tabDocView = document.getElementById("tab-doc-view");
+      const tabMdView = document.getElementById("tab-md-view");
+      const docContainer = document.getElementById("document-render-container");
+      const mdContainer = document.getElementById("markdown-render-container");
+      const mdOutput = document.getElementById("markdown-output");
+      const checkContentEditable = document.getElementById("check-content-editable");
+
+      const statWords = document.getElementById("stat-words");
+      const statClauses = document.getElementById("stat-clauses");
+      const statTime = document.getElementById("stat-time");
+
+      const btnCopy = document.getElementById("btn-copy");
+      const btnExportTxt = document.getElementById("btn-export-txt");
+      const btnExportDoc = document.getElementById("btn-export-doc");
+      const btnPrint = document.getElementById("btn-print");
+      const toast = document.getElementById("toast-notification");
+      const toastMsg = document.getElementById("toast-message");
+
+      let currentMarkdown = "";
+      let currentHTML = "";
+      let currentRecitals = [];
+
+      // Initialize with default date
+      inputDate.value = new Date().toISOString().split("T")[0];
+
+      // Load Preset
+      function loadPreset(presetKey) {
+        const preset = LEGAL_PRESETS[presetKey];
+        if (!preset) return;
+
+        inputDocType.value = preset.documentType;
+        inputParty1Name.value = preset.party1.name;
+        inputParty1Role.value = preset.party1.role;
+        inputParty1Details.value = preset.party1.details;
+        inputParty2Name.value = preset.party2.name;
+        inputParty2Role.value = preset.party2.role;
+        inputParty2Details.value = preset.party2.details;
+        inputDate.value = preset.effectiveDate;
+        inputTerms.value = preset.terms;
+        currentRecitals = preset.recitals ? [...preset.recitals] : [];
+
+        presetButtons.forEach(btn => {
+          btn.classList.toggle("active", btn.getAttribute("data-preset") === presetKey);
+        });
+
+        generateDocument();
+      }
+
+      // Collect Data from Form
+      function getFormData() {
+        return {
+          documentType: inputDocType.value.trim() || "Legal Agreement",
+          party1: {
+            name: inputParty1Name.value.trim() || "Party 1",
+            role: inputParty1Role.value.trim() || "Client",
+            details: inputParty1Details.value.trim()
+          },
+          party2: {
+            name: inputParty2Name.value.trim() || "Party 2",
+            role: inputParty2Role.value.trim() || "Contractor",
+            details: inputParty2Details.value.trim()
+          },
+          effectiveDate: inputDate.value || new Date().toISOString().split("T")[0],
+          recitals: currentRecitals,
+          terms: inputTerms.value
+        };
+      }
+
+      // Main Generator Trigger
+      function generateDocument() {
+        const data = getFormData();
+        currentMarkdown = window.legalGenerator.generateMarkdown(data);
+        currentHTML = window.legalGenerator.generateHTML(data);
+
+        docContainer.innerHTML = currentHTML;
+        mdOutput.value = currentMarkdown;
+
+        // Apply contentEditable state
+        updateEditableState();
+
+        // Update stats
+        updateStats();
+      }
+
+      function updateStats() {
+        const text = mdOutput.value;
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        const clausesCount = (text.match(/^[0-9]+\.\s+\*\*/gm) || []).length;
+        const readMinutes = Math.max(1, Math.ceil(words / 200));
+
+        statWords.textContent = `${words.toLocaleString()} words`;
+        statClauses.textContent = `${clausesCount} clauses`;
+        statTime.textContent = `~${readMinutes} min read`;
+      }
+
+      function updateEditableState() {
+        const docArticle = document.getElementById("printable-contract");
+        if (docArticle) {
+          docArticle.contentEditable = checkContentEditable.checked ? "true" : "false";
+          docArticle.style.outline = checkContentEditable.checked ? "1px dashed #3b82f6" : "none";
+        }
+      }
+
+      function showToast(message, isSuccess = true) {
+        toastMsg.textContent = message;
+        toast.className = `toast show ${isSuccess ? 'success' : ''}`;
+        setTimeout(() => {
+          toast.className = "toast";
+        }, 3200);
+      }
+
+      // Event Listeners
+      presetButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          loadPreset(btn.getAttribute("data-preset"));
+        });
+      });
+
+      quickTags.forEach(tag => {
+        tag.addEventListener("click", () => {
+          const val = tag.getAttribute("data-tag");
+          if (inputTerms.value.trim().length > 0) {
+            inputTerms.value += ";\n" + val;
+          } else {
+            inputTerms.value = val;
+          }
+          if (checkAutoUpdate.checked) generateDocument();
+        });
+      });
+
+      // Auto update on input
+      const formInputs = [
+        inputDocType, inputParty1Name, inputParty1Role, inputParty1Details,
+        inputParty2Name, inputParty2Role, inputParty2Details, inputDate, inputTerms
+      ];
+      formInputs.forEach(input => {
+        input.addEventListener("input", () => {
+          if (checkAutoUpdate.checked) generateDocument();
+        });
+      });
+
+      btnTodayDate.addEventListener("click", () => {
+        inputDate.value = new Date().toISOString().split("T")[0];
+        if (checkAutoUpdate.checked) generateDocument();
+      });
+
+      btnGenerate.addEventListener("click", () => {
+        generateDocument();
+        showToast("Agreement successfully synthesized!");
+      });
+
+      btnResetForm.addEventListener("click", () => {
+        if (confirm("Reset all inputs to blank state?")) {
+          inputDocType.value = "Custom Agreement";
+          inputParty1Name.value = "";
+          inputParty1Role.value = "First Party";
+          inputParty1Details.value = "";
+          inputParty2Name.value = "";
+          inputParty2Role.value = "Second Party";
+          inputParty2Details.value = "";
+          inputTerms.value = "";
+          currentRecitals = [];
+          presetButtons.forEach(b => b.classList.remove("active"));
+          generateDocument();
+        }
+      });
+
+      checkContentEditable.addEventListener("change", updateEditableState);
+
+      // Tabs
+      tabDocView.addEventListener("click", () => {
+        tabDocView.classList.add("active");
+        tabMdView.classList.remove("active");
+        docContainer.style.display = "flex";
+        mdContainer.style.display = "none";
+      });
+
+      tabMdView.addEventListener("click", () => {
+        tabMdView.classList.add("active");
+        tabDocView.classList.remove("active");
+        docContainer.style.display = "none";
+        mdContainer.style.display = "block";
+      });
+
+      // Export Actions
+      btnCopy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(currentMarkdown);
+          showToast("Markdown copied to clipboard!");
+        } catch (err) {
+          // Fallback
+          mdOutput.select();
+          document.execCommand("copy");
+          showToast("Markdown copied to clipboard!");
+        }
+      });
+
+      btnExportTxt.addEventListener("click", () => {
+        const title = (inputDocType.value.trim() || "Legal_Agreement").replace(/[^a-zA-Z0-9_-]/g, "_");
+        window.legalGenerator.exportPlainTXT(currentMarkdown, `${title}.txt`);
+        showToast("Downloaded plain text contract (.txt)");
+      });
+
+      btnExportDoc.addEventListener("click", () => {
+        const title = (inputDocType.value.trim() || "Legal_Agreement").replace(/[^a-zA-Z0-9_-]/g, "_");
+        const docElem = document.getElementById("printable-contract");
+        const htmlToExport = docElem ? docElem.innerHTML : currentHTML;
+        window.legalGenerator.exportWordDocument(htmlToExport, `${title}.doc`);
+        showToast("Downloaded Word document (.doc)");
+      });
+
+      btnPrint.addEventListener("click", () => {
+        // Ensure doc tab is active before printing
+        tabDocView.click();
+        window.print();
+      });
+
+      // Initial Load
+      loadPreset("freelance");
+    })();
+  </script>
+</body>
+</html>
